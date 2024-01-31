@@ -1,3 +1,4 @@
+import 'package:comarques/screens/provincia.dart';
 import 'package:comarques/screens/registrer.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
@@ -93,6 +94,11 @@ class _LoginPgState extends State<LoginPg> {
                     child: ElevatedButton(
                       child: const Text('Login'),
                       onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Provincia()),
+                        );
                         logger.i(
                             '--Login-- \n Email: ${_userController.text} \n Pass: ${_passwdController.text}');
                       },
