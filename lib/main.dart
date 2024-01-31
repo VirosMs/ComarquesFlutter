@@ -1,3 +1,4 @@
+import 'package:comarques/screens/registrer.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
@@ -106,8 +107,13 @@ class _LoginPgState extends State<LoginPg> {
                     child: ElevatedButton(
                       child: const Text('Sign Up'),
                       onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Registrer()),
+                        );
                         logger.i(
-                            '--Login-- \n Email: ${_userController.text} \n Pass: ${_passwdController.text}');
+                            'Redirigido a la pantalla de registro');
                       },
                     ),
                   )
