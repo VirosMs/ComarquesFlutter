@@ -5,9 +5,9 @@ import 'package:logger/logger.dart';
 
 class Comarca extends StatelessWidget {
   final int indexProvi;
-  
+
   const Comarca({Key? key, required this.indexProvi}) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,7 +18,7 @@ class Comarca extends StatelessWidget {
 
 class ComarcaPg extends StatefulWidget {
   final int indexProvi;
-  
+
   const ComarcaPg({Key? key, required this.indexProvi}) : super(key: key);
 
   @override
@@ -28,7 +28,10 @@ class ComarcaPg extends StatefulWidget {
 class _ComarcaPgState extends State<ComarcaPg> {
   @override
   Widget build(BuildContext context) {
+    double maxWidth = MediaQuery.of(context).size.width * 0.9;
+
     Logger logger = Logger();
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -36,10 +39,13 @@ class _ComarcaPgState extends State<ComarcaPg> {
           onPressed: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const MyApp()));
-                logger.i('Click');
+            logger.i('Click');
           },
         ),
         title: const Text('Comarques'),
+        backgroundColor: Colors.transparent.withOpacity(0), // Set the desired transparency level here
+        // END: abpxx6d04wxr
+        
       ),
       body: ListView.builder(
         itemCount:
@@ -55,22 +61,32 @@ class _ComarcaPgState extends State<ComarcaPg> {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  CircleAvatar(
-                    radius: 120,
-                    backgroundImage:
-                        
-                        Image.network(provincies["provincies"][widget.indexProvi]['comarques'][index]['img']).image,
-                  ),
                   Container(
+                    height: 200,
+                    width: maxWidth,
                     decoration: BoxDecoration(
                       color: Colors.black45,
-                      borderRadius: BorderRadius.circular(20),
+                      image: DecorationImage(
+                        image: NetworkImage(provincies["provincies"]
+                            [widget.indexProvi]['comarques'][index]['img']),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.circular(15),
                     ),
-                    child: Text(
-                      provincies["provincies"][widget.indexProvi]['comarques'][index]['comarca'],
-                      style: const TextStyle(
-                        fontSize: 24,
-                        color: Colors.white,
+                  ),
+                  Align(                    
+                    alignment:
+                        Alignment.bottomLeft, // Cambia la alineación aquí
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 25),
+                      child: Text(
+                        provincies["provincies"][widget.indexProvi]['comarques']
+                            [index]['comarca'],
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
