@@ -118,6 +118,7 @@ class _LoginPgState extends State<LoginPg> {
                           MaterialPageRoute(
                               builder: (context) => const Registrer()),
                         );
+                        
                         logger.i(
                             'Redirigido a la pantalla de registro');
                       },

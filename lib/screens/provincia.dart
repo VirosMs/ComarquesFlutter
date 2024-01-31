@@ -1,7 +1,7 @@
 import 'package:comarques/main.dart';
+import 'package:comarques/screens/comarca.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-import 'package:flutter/painting.dart';
 import '../data/api.dart';
 
 void main() => runApp(const Provincia());
@@ -48,6 +48,8 @@ class _ProvinciaPgState extends State<ProvinciaPg> {
             child: GestureDetector(
               onTap: () {
                 logger.i('Click');
+                Navigator.push(context, 
+                MaterialPageRoute(builder: (context) =>  Comarca(indexProvi: index)));
               },
               child: Stack(
                 alignment: Alignment.center,
