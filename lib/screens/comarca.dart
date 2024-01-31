@@ -1,4 +1,5 @@
 import 'package:comarques/main.dart';
+import 'package:comarques/screens/comarca_info.dart';
 import 'package:flutter/material.dart';
 import '../data/api.dart';
 import 'package:logger/logger.dart';
@@ -56,7 +57,13 @@ class _ComarcaPgState extends State<ComarcaPg> {
             child: GestureDetector(
               onTap: () {
                 // Navigator.push(context,
-                //     MaterialPageRoute(builder: (context) => const Comarca()));
+                //     MaterialPageRoute(builder: (context) => ComarcaInfo(indexProvi: widget.indexProvi, indexComarca: index)));
+                Navigator.pushNamed(context, '/comarcaInfo', arguments: {
+                  'comarca': provincies["provincies"][widget.indexProvi]
+                      ['comarques'][index],
+                });
+                logger.i(provincies["provincies"][widget.indexProvi]
+                      ['comarques'][index]);
               },
               child: Stack(
                 alignment: Alignment.center,
