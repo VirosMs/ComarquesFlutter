@@ -57,9 +57,54 @@ class _ComarcaInfoState extends State<ComarcaInfo> {
         ),
         body: <Widget>[
           // Aquí va el contenido de la página de Info
-          Center(child: Text(comarca['comarca'])),
+          Center(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 30),
+                  AspectRatio(
+                    aspectRatio: MediaQuery.of(context).size.width / 250,
+                    child: Image.network(
+                      comarca['img'],
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  Text(
+                    comarca['comarca'],
+                    style: TextStyle(
+                      fontWeight: FontWeight.w900,
+                      color: Colors.black.withOpacity(0.5),
+                      fontSize: 30,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'Capital: ${comarca['capital']}',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w900,
+                      //color: Colors.black.withOpacity(0.5),
+                      fontSize: 25,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    comarca['desc'],
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 20,
+                    ),
+                    textAlign: TextAlign.justify,
+                  )
+                ],
+              ),
+            ),
+          ),
           // Aquí va el contenido de la página de Tiempo
-          const Center(child:  Text('Aquí va el contenido de la página de Tiempo')),
+          const Center(
+              child: Text('Aquí va el contenido de la página de Tiempo')),
         ][currentPageIndex],
       );
     }

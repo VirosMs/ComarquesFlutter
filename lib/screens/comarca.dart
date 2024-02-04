@@ -1,5 +1,6 @@
 import 'package:comarques/main.dart';
 import 'package:comarques/screens/comarca_info.dart';
+import 'package:comarques/screens/provincia.dart';
 import 'package:flutter/material.dart';
 import '../data/api.dart';
 import 'package:logger/logger.dart';
@@ -51,7 +52,7 @@ class _ComarcaPgState extends State<ComarcaPg> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const MyApp()));
+                MaterialPageRoute(builder: (context) => const Provincia()));
             logger.i('Click');
           },
         ),
