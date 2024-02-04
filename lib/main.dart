@@ -1,4 +1,3 @@
-import 'package:comarques/screens/comarca_info.dart';
 import 'package:comarques/screens/provincia.dart';
 import 'package:comarques/screens/registrer.dart';
 import 'package:flutter/material.dart';
