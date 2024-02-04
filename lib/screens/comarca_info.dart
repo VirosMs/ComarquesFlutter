@@ -1,55 +1,67 @@
-import 'package:comarques/data/api.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
+class ComarcaInfo extends StatefulWidget {
+  final Map args;
 
-class ComarcaInfo extends StatelessWidget {
-
-  const ComarcaInfo(
-      {Key? key}): super(key: key);
-
-      
+  const ComarcaInfo({Key? key, required this.args}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-  final Map args = ModalRoute.of(context)?.settings.arguments as Map;
-  var comarca = args['comarques'];
-
-    return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('Comarca Info'),
-      ),
-      child: Center(
-        child: CupertinoButton(
-          child: Text(comarca['comarca']),
-          onPressed: () {
-            Navigator.push(
-              context,
-              CupertinoPageRoute(builder: (context) => const SecondRoute()),
-            );
-          },
-        ),
-      ),
-    );
-  }
+  State<ComarcaInfo> createState() => _ComarcaInfoState();
 }
 
-class SecondRoute extends StatelessWidget {
-  const SecondRoute({super.key});
+class _ComarcaInfoState extends State<ComarcaInfo> {
+  int currentPageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('Second Route'),
-      ),
-      child: Center(
-        child: CupertinoButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text('Go back!'),
+    Logger logger = Logger();
+    Map? comarca = widget.args['comarca'] as Map?;
+    logger.i('comarca: $comarca');
+
+    if (comarca == null) {
+      return const Text('Error 404');
+    } else {
+      return Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+              logger.i('Click');
+            },
+          ),
+          title: Text(comarca['comarca']),
+          backgroundColor: Colors.transparent.withOpacity(0),
         ),
-      ),
-    );
+        bottomNavigationBar: NavigationBar(
+          onDestinationSelected: (int index) {
+            setState(() {
+              currentPageIndex = index;
+            });
+          },
+          indicatorColor: Colors.amber,
+          selectedIndex: currentPageIndex,
+          destinations: const <Widget>[
+            NavigationDestination(
+              selectedIcon: Icon(Icons.info),
+              icon: Icon(Icons.info_outline),
+              label: 'Info',
+            ),
+            NavigationDestination(
+              selectedIcon: Icon(Icons.sunny),
+              icon: Icon(Icons.cloud),
+              label: 'Tiempo',
+            ),
+          ],
+        ),
+        body: <Widget>[
+          // Aquí va el contenido de la página de Info
+          Center(child: Text(comarca['comarca'])),
+          // Aquí va el contenido de la página de Tiempo
+          const Center(child:  Text('Aquí va el contenido de la página de Tiempo')),
+        ][currentPageIndex],
+      );
+    }
   }
 }

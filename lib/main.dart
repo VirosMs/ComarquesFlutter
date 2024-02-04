@@ -17,11 +17,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: const LoginPg(), 
-      routes: {
-      '/comarcaInfo': (context) => const ComarcaInfo(),
-    });
+    return const MaterialApp(
+      home: LoginPg(), 
+      );
   }
 }
 

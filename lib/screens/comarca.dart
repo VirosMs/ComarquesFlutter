@@ -13,6 +13,18 @@ class Comarca extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: ComarcaPg(indexProvi: indexProvi),
+      onGenerateRoute: (settings) {
+        if (settings.name == '/comarcaInfo') {
+          final args = settings.arguments as Map;
+          return MaterialPageRoute(
+            builder: (context) {
+              return ComarcaInfo(args: args);
+            },
+          );
+        }
+        return null;
+        // ... manejar otras rutas ...
+      },
     );
   }
 }
@@ -44,9 +56,9 @@ class _ComarcaPgState extends State<ComarcaPg> {
           },
         ),
         title: const Text('Comarques'),
-        backgroundColor: Colors.transparent.withOpacity(0), // Set the desired transparency level here
+        backgroundColor: Colors.transparent
+            .withOpacity(0), // Set the desired transparency level here
         // END: abpxx6d04wxr
-        
       ),
       body: ListView.builder(
         itemCount:
@@ -63,7 +75,7 @@ class _ComarcaPgState extends State<ComarcaPg> {
                       ['comarques'][index],
                 });
                 logger.i(provincies["provincies"][widget.indexProvi]
-                      ['comarques'][index]);
+                    ['comarques'][index]);
               },
               child: Stack(
                 alignment: Alignment.center,
@@ -81,7 +93,7 @@ class _ComarcaPgState extends State<ComarcaPg> {
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
-                  Align(                    
+                  Align(
                     alignment:
                         Alignment.bottomLeft, // Cambia la alineación aquí
                     child: Padding(
