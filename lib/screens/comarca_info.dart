@@ -103,8 +103,101 @@ class _ComarcaInfoState extends State<ComarcaInfo> {
             ),
           ),
           // Aquí va el contenido de la página de Tiempo
-          const Center(
-              child: Text('Aquí va el contenido de la página de Tiempo')),
+          Center(
+              child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: Column(children: [
+                    const SizedBox(height: 30),
+                    AspectRatio(
+                      aspectRatio: MediaQuery.of(context).size.width / 250,
+                      child: Image.network(
+                        'assets/weather.png',
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.thermostat_outlined,
+                          size: 50,
+                        ),
+                        Text(
+                          "  5.4º",
+                          style: TextStyle(
+                            fontSize: 50,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.wind_power,
+                          size: 25,
+                        ),
+                        Text(
+                          "   9.4km/h",
+                          style: TextStyle(fontSize: 25),
+                        ),
+                        Text(
+                          "   Ponent",
+                          style: TextStyle(fontSize: 25),
+                        ),
+                        Icon(Icons.arrow_back),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    Column(
+                      //mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            const Text(
+                              "Població:",
+                              style: TextStyle(fontSize: 25),
+                            ),
+                            Text(
+                              comarca["poblacio"],
+                              style: const TextStyle(fontSize: 25),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            const Text(
+                              "Latitud:",
+                              style: TextStyle(fontSize: 25),
+                            ),
+                            Text(
+                              "${comarca["coordenades"][0]}",
+                              style: const TextStyle(fontSize: 25),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            const Text(
+                              "Longitud:",
+                              style: TextStyle(fontSize: 25),
+                            ),
+                            Text(
+                              "${comarca["coordenades"][1]}",
+                              style: const TextStyle(fontSize: 25),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ]))),
         ][currentPageIndex],
       );
     }
